@@ -1,0 +1,4 @@
+---
+# Variables specific to all hosts
+ansible_become: true
+ansible_connection: ssh
