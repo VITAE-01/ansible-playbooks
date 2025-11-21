@@ -1,0 +1,11 @@
+---
+
+- name: Initialize user role
+  hosts: all
+  become: true
+  collections:
+    - adams.shared
+
+  roles:
+    - add_group_role
+    - add_user_role
