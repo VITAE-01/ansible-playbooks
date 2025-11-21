@@ -1,0 +1,11 @@
+---
+
+- name: Install apache web server
+  hosts: all
+  become: true
+  collections:
+    - adams.webservers
+
+  roles:
+    - bootstrap_setup_role
+    - webservers_role
