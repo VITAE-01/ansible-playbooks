@@ -26,20 +26,22 @@ while IFS= read -r url; do
     fi
 
     filename=$(basename "$url")
-    echo "Installing collection: $filename from nexus repository..."
+    base="${filename%.tar.gz}"
+    
+    echo "Installing collection: $base from nexus repository..."
 
     # Use curl to download the collection binary with authentication
     curl -fSL -u "$NEXUS_USER:$NEXUS_PASSWORD" "$url" -O "$filename"
 
     # Install the collection using ansible-galaxy
-    ansible-galaxy collection install "$filename" --force
+    ansible-galaxy collection install "$filename"
 
     if [[ $? -ne 0 ]]; then
         echo "Error: Failed to install collection '$filename'."
         exit 1
     fi
 
-    # Remove the downloaded file after installation
+    # Remove the downloaded binary file after installation
     rm -f "$filename"
-    echo "Successfully installed collection: $filename"
+    echo "Successfully installed collection: $base"
 done < "$COLLECTION_FILE"
