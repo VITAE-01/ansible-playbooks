@@ -1,9 +1,0 @@
----
-
-collections:
-  - name: adams.shared
-    source: https://github.com/VITAE-01/ansible-collections/releases/download/shared-v1.0.0/adams-shared-1.0.0.tar.gz
-    type: url
-  - name: adams.webservers
-    source: https://github.com/VITAE-01/ansible-collections/releases/download/webservers-v1.0.1/adams-webservers-1.0.1.tar.gz
-    type: url
