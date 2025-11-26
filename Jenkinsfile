@@ -41,10 +41,13 @@ pipeline {
                         checkout scm
                     }
                 }
-                sh '''
-                    echo "ANSIBLE_CONFIG is set to: $ANSIBLE_CONFIG"
-                    echo "ANSIBLE_SSH_ARGS is set to: $ANSIBLE_SSH_ARGS"
-                '''
+                
+                sh """
+                    echo '======= Raw Variable ======='
+                    echo "ANSIBLE_CONFIG=$ANSIBLE_CONFIG"
+                    echo '======= env Output ======='
+                    env | grep ANSIBLE
+                """
             }
         }
 
