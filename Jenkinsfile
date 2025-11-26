@@ -41,13 +41,6 @@ pipeline {
                         checkout scm
                     }
                 }
-                
-                sh """
-                    echo '======= Raw Variable ======='
-                    echo "ANSIBLE_CONFIG=$ANSIBLE_CONFIG"
-                    echo '======= env Output ======='
-                    env | grep ANSIBLE
-                """
             }
         }
 
@@ -63,7 +56,7 @@ pipeline {
             steps {
                 script {
                     echo "Installing Ansible dependencies for repository: ${repoName} - branch: ${branchName}"
-
+                    
                 }
             }
         }
