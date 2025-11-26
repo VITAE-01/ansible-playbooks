@@ -4,6 +4,11 @@ def branchName = ''
 pipeline {
     agent any
 
+    environment {
+        ANSIBLE_CONFIG = '$PWD/ansible.cfg'
+        ANSIBLE_SSH_ARGS = '-o ControlMaster=no -o ControlPersist=no -o ControlPath=none'
+    }
+
     options {
         timestamps()
         disableConcurrentBuilds()
@@ -37,26 +42,6 @@ pipeline {
                     }
                 }
             }
-        }
-
-        stage('Set up ansible environment variables') {
-            when {
-                anyOf {
-                    branch 'PR-*'
-                    expression {
-                        return branchName == 'Dev'
-                    }
-                }
-            }
-            steps {
-                script {
-                    echo "Setting up Ansible environment variables for repository: ${repoName} - branch: ${branchName}"
-                    // Add any environment variable setup needed for Ansible here
-                    sh 'export ANSIBLE_CONFIG=$PWD/ansible.cfg'
-                    sh 'export ANSIBLE_SSH_ARGS="-o ControlMaster=no -o ControlPersist=no -o ControlPath=none"'
-                }
-            }
-            
         }
 
         stage('Install Ansible collections dependencies') {
