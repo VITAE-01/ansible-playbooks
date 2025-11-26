@@ -41,6 +41,10 @@ pipeline {
                         checkout scm
                     }
                 }
+                sh '''
+                    echo "ANSIBLE_CONFIG is set to: $ANSIBLE_CONFIG"
+                    echo "ANSIBLE_SSH_ARGS is set to: $ANSIBLE_SSH_ARGS"
+                '''
             }
         }
 
@@ -56,7 +60,7 @@ pipeline {
             steps {
                 script {
                     echo "Installing Ansible dependencies for repository: ${repoName} - branch: ${branchName}"
-                    
+
                 }
             }
         }
