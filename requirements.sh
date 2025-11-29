@@ -17,6 +17,8 @@ if [[ ! -f "$COLLECTION_FILE" ]]; then
     exit 1
 fi
 
+sed -n 'l' "$COLLECTION_FILE"
+
 
 # Loop through each URL in the collection file
 while IFS= read -r url; do
