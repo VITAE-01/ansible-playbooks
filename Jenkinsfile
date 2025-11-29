@@ -54,12 +54,12 @@ pipeline {
                 script {
                     echo "Installing Ansible dependencies for repository: ${repoName} - branch: ${branchName}"
                     withCredentials([usernamePassword(credentialsId: 'NEXUS_CREDS', passwordVariable: 'NEXUS_PASS', usernameVariable: 'NEXUS_USER')]) {
-                        sh """
+                        sh '''
                             chmod +x ./requirements.sh
                             dos2unix ./requirements.sh
                             dos2unix collections.txt
                             ./requirements.sh ${NEXUS_USER} ${NEXUS_PASS} collections.txt
-                        """
+                        '''
                     }
                 }
             }
