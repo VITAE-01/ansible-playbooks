@@ -46,28 +46,27 @@ pipeline {
 
         stage('Install Ansible collections dependencies') {
             when {
-                anyOf {
-                    branch 'PR-*'
-                    expression {
-                        return branchName == 'Dev'
-                    }
+                expression {
+                    return branchName == 'Dev'
                 }
             }
             steps {
                 script {
                     echo "Installing Ansible dependencies for repository: ${repoName} - branch: ${branchName}"
-                    
+                    withCredentials([usernamePassword(credentialsId: 'NEXUS_CREDS', passwordVariable: 'NEXUS_PASS', usernameVariable: 'NEXUS_USER')]) {
+                        sh """
+                            chmod +x ./requirements.sh
+                            ./requirements.sh ${NEXUS_USER} ${NEXUS_PASS} collections.txt
+                        """
+                    }
                 }
             }
         }
 
         stage('Run Ansible Playbook') {
             when {
-                anyOf {
-                    branch 'PR-*'
-                    expression {
-                        return branchName == 'Dev'
-                    }
+                expression {
+                    return branchName == 'Dev'
                 }
             }
             steps {
@@ -77,8 +76,6 @@ pipeline {
                 }
             }
         }
-
-        // Additional stages can be added here
     }
 
     post {
@@ -90,6 +87,10 @@ pipeline {
         }
         aborted {
             echo 'Pipeline was aborted.'
+        }
+        always {
+            echo 'Cleaning up workspace...'
+            cleanWs()
         }
     }
 }
