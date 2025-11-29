@@ -18,6 +18,7 @@ if [[ ! -f "$COLLECTION_FILE" ]]; then
 fi
 
 sed -n 'l' "$COLLECTION_FILE"
+cat -A "$COLLECTION_FILE"
 
 
 # Loop through each URL in the collection file
