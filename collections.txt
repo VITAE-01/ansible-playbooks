@@ -1,2 +1,1 @@
 http://192.168.100.14:8081/repository/ansible_collections/ansible-collections/Dev/adams-shared-1.0.0-Dev.tar.gz
-http://192.168.100.14:8081/repository/ansible_collections/ansible-collections/Dev/adams-webservers-1.0.1-Dev.tar.gz
