@@ -17,7 +17,6 @@ if [[ ! -f "$COLLECTION_FILE" ]]; then
     exit 1
 fi
 
-sed -n 'l' "$COLLECTION_FILE"
 cat -A "$COLLECTION_FILE"
 
 
